@@ -71,11 +71,11 @@ namespace Labb_3_API.Controllers
                 var personInterest = await _person.AddNewInterest(personId, interestId);
                 if (personInterest == null)
                 {
-                    return NotFound("Person or interest not found.");
+                    return NotFound("The relation already exists");
                 }
                 return Ok(personInterest);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 
                 return StatusCode(StatusCodes.Status500InternalServerError, 
