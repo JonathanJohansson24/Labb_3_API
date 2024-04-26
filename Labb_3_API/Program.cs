@@ -22,6 +22,8 @@ namespace Labb_3_API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IPerson, PersonRepository>();
+            builder.Services.AddScoped<ILink, LinkRepository>();
+            builder.Services.AddScoped<IInterest, InterestRepository>();
 
 
             //Connectar EF till SQL
