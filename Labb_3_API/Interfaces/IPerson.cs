@@ -12,5 +12,6 @@ namespace Labb_3_API.Interfaces
         Task<IEnumerable<Link>> GetLinksById(int id);
         Task<PersonInterest> AddNewInterest(int personId, int interestId);
 
+        Task<Link> AddLink(int peronId, int interestId, string url);
     }
 }

@@ -83,5 +83,28 @@ namespace Labb_3_API.Interfaces
             await _context.SaveChangesAsync();
             return newInterest;
         }
+
+        public async Task<Link> AddLink(int personId, int interestId, string url)
+        {
+            // Checks if there is a existing relation in the personinterest
+            var relation = await _context.PersonInterests
+                                  .FirstOrDefaultAsync(pi => pi.PerId == personId && pi.InterestId == interestId);
+
+            if(relation == null)
+            {
+                return null;
+            }
+
+            var newLink = new Link
+            {
+                URL = url,
+                PersonInterestId = relation.PersonInterestId
+            };
+
+            _context.Links.Add(newLink);
+            await _context.SaveChangesAsync();
+
+            return newLink;
+        }
     }
 }

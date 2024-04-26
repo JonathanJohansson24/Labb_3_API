@@ -78,7 +78,29 @@ namespace Labb_3_API.Controllers
             catch (Exception ex)
             {
                 
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error to add new interest to database");
+                return StatusCode(StatusCodes.Status500InternalServerError, 
+                                        "Error to add new interest to database");
+            }
+        }
+
+        [HttpPost("AddNewLink/{personId:int}/{interestId:int}")]
+        public async Task<IActionResult> AddLink(int personId, int interestId, [FromBody] string url)
+        {
+            try
+            {
+                var newLink = await _person.AddLink(personId, interestId, url);
+                if(newLink == null)
+                {
+                    return NotFound("No relation found");
+                }
+
+                return Ok(newLink);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, 
+                                        "Error adding the link to the database");
             }
         }
 
